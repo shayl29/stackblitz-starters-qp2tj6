@@ -6,6 +6,7 @@ import { provideEffects } from '@ngrx/effects';
 import { TodoEffects } from './effects/todo.effects';
 import { provideHttpClient } from '@angular/common/http';
 import { App } from './app.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(App, {
   providers: [
@@ -13,5 +14,6 @@ bootstrapApplication(App, {
     provideStore(),
     provideState('todos', todoReducer),
     provideEffects(TodoEffects),
+    provideAnimations(),
   ],
 });

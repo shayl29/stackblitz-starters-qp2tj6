@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class App implements OnInit {
   name = 'Angular';
   allTodos$ = this.store.select(TodoSelectors.selectAllTodos);
-  allTodosTitles$ = this.store.select(TodoSelectors.selectAllTodosTitles);
+  suggestions: string[] = [];
 
   selectedItem: any;
 
@@ -27,8 +27,11 @@ export class App implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
+    this.primengConfig.ripple = false;
     this.store.dispatch(TodoActions.getTodos());
+    this.store
+      .select(TodoSelectors.selectAllTodosTitles)
+      .subscribe((titles) => (this.suggestions = titles));
   }
 
   search(query: string) {

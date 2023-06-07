@@ -2,8 +2,12 @@
 <div>
   <p-autoComplete
     [(ngModel)]="selectedItem"
-    [suggestions]="(allTodosTitles$ | async) || []"
+    [suggestions]="suggestions"
     (completeMethod)="search($event.query)"
+    [virtualScroll]="true"
+    [virtualScrollItemSize]="34"
+    [dropdown]="true"
+    [lazy]="true"
   ></p-autoComplete>
 </div>
 <ul>
