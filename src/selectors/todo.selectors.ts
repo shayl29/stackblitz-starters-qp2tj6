@@ -3,4 +3,5 @@ import { TodoState } from '../reducers/todo.reducer';
 
 export const selectTodos = createFeatureSelector<TodoState>('todos');
 export const selectAllTodos = createSelector(selectTodos, (state) => state.all);
-export const selectAllTodosTitles = createSelector(selectTodos, (state) => state.all.map(t => t.title));
+export const selectFilteredTodos = createSelector(selectTodos, (state) => state.filtered);
+export const selectAllTodosTitles = createSelector(selectFilteredTodos, (state) => state.map(t => t.title));

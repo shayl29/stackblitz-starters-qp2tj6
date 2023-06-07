@@ -10,6 +10,7 @@ export const getTodosError = createAction(
   '[To do] Get List Error',
   props<{ error: any }>()
 );
+
 export const getTodo = createAction(
   '[To do] Get',
   props<{ id: number }>()
@@ -22,3 +23,7 @@ export const getTodoError = createAction(
   '[To do] Get Error',
   props<{ error: any }>()
 );
+
+export const filterTodos = createAction('[To do] filter', props<{query: string}>());
+export const setFilteredTodos = createAction('[To do] set filtered', props<{filtered: Todo[]}>());
+

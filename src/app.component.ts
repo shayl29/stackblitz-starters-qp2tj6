@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
 import * as TodoSelectors from './selectors/todo.selectors';
@@ -31,9 +31,8 @@ export class App implements OnInit {
     this.store.dispatch(TodoActions.getTodos());
   }
 
-  @HostListener('p-autoComplete:completeMethod', ['$event', 'query'])
   search(query: string) {
-    console.log(query);
+    this.store.dispatch(TodoActions.filterTodos({ query }));
     // this.suggestions = [...Array(10).keys()].map(item => event.query + '-' + item);
   }
 }
