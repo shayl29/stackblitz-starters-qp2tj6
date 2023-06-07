@@ -1,0 +1,16 @@
+<h1>Hello from {{ name }}!</h1>
+<div>
+  <p-autoComplete
+    [(ngModel)]="selectedItem"
+    [suggestions]="(allTodosTitles$ | async) || []"
+  ></p-autoComplete>
+</div>
+<ul>
+  <li *ngFor="let todo of allTodos$ | async">
+    <div>Id: {{ todo.id }}</div>
+    <div>User Id: {{ todo.userId }}</div>
+    <div>Title: {{ todo.title }}</div>
+    <div>Complete: {{ todo.completed }}</div>
+    <button pButton class="pi pi-check">Click</button>
+  </li>
+</ul>
