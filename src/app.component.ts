@@ -19,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 export class App implements OnInit, OnDestroy {
   name = 'Angular';
   destroy$ = new Subject<void>();
-  allTodos$ = this.store.select(TodoSelectors.selectAllTodos);
+  filteredTodos$ = this.store.select(TodoSelectors.selectFilteredTodos);
   suggestions$ = this.store.select(TodoSelectors.selectSuggestions);
   suggestions: string[] = [];
 
