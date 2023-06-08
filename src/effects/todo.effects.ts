@@ -20,26 +20,36 @@ export class TodoEffects {
   getTodos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.getTodos),
-      switchMap(() => {
-        return this.apiService.getTodos().pipe(
+      switchMap(() =>
+        this.apiService.getTodos().pipe(
           map((todos) => TodoActions.getTodosDone({ todos })),
           catchError((error) => of(TodoActions.getTodosError({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
-  filter$ = createEffect(() =>
+  filterSuggestions$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActions.filterTodos),
-      withLatestFrom(this.store.select(TodoSelectors.selectAllTodos)),
+      ofType(TodoActions.filterSuggestions),
+      withLatestFrom(
+        this.store.select(TodoSelectors.selectAllTodosTitles).pipe()
+      ),
       distinctUntilChanged(),
       debounceTime(100),
-      map(([action, todos = []]) => {
-        const filtered = todos.filter((t) => t.title.includes(action.query));
-        console.log(filtered)
-        return TodoActions.setFilteredTodos({ filtered });
-      })
+      map(([action, titles = []]) =>
+        titles.filter((t) => t.includes(action.query))
+      ),
+      map((suggestions) => TodoActions.setSuggestions({ suggestions }))
+    )
+  );
+
+  filterTodos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.setQuery),
+      withLatestFrom(this.store.select(TodoSelectors.selectAllTodos).pipe()),
+      map(([{ query }, todos]) => todos.filter((t) => t.title.includes(query))),
+      map((filtered) => TodoActions.setFilteredTodos({ filtered }))
     )
   );
 

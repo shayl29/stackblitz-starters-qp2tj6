@@ -24,6 +24,11 @@ export const getTodoError = createAction(
   props<{ error: any }>()
 );
 
+export const filterSuggestions = createAction('[To do] filter suggestions', props<{query: string}>());
+export const setSuggestions = createAction('[To do] set suggestions', props<{suggestions: string[]}>());
+
 export const filterTodos = createAction('[To do] filter', props<{query: string}>());
 export const setFilteredTodos = createAction('[To do] set filtered', props<{filtered: Todo[]}>());
+
+export const setQuery = createAction('[To do] set query', props<{query: string}>());
 

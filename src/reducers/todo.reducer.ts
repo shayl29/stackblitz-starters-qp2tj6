@@ -5,12 +5,14 @@ import { Todo } from '../models/Todo';
 export interface TodoState {
   all: Todo[];
   filtered: Todo[];
+  suggestions: string[]
   query: string;
 }
 
 export const initialState: TodoState = {
   all: [],
   filtered: [],
+  suggestions: [],
   query: ''
 };
 
@@ -20,5 +22,6 @@ export const todoReducer = createReducer(
     ...state,
     all: [...todos],
   })),
-  on(TodoActions.setFilteredTodos, (state, {filtered}) => ({...state, filtered}))
+  on(TodoActions.setFilteredTodos, (state, {filtered}) => ({...state, filtered})),
+  on(TodoActions.setSuggestions, (state, {suggestions}) => ({...state, suggestions}))
 );
