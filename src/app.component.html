@@ -5,8 +5,10 @@
     (onSelect)="select($event)"
     [suggestions]="suggestions"
     (completeMethod)="search($event.query)"
+    (onClear)="select('')"
     [virtualScroll]="true"
     [virtualScrollItemSize]="34"
+    [showClear]="true"
     [lazy]="true"
   ></p-autoComplete>
 </div>
